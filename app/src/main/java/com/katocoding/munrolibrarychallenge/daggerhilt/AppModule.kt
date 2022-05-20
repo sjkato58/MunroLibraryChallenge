@@ -2,6 +2,7 @@ package com.katocoding.munrolibrarychallenge.daggerhilt
 
 import android.content.Context
 import com.katocoding.munrolibrarychallenge.data.errors.DataErrorHandler
+import com.katocoding.munrolibrarychallenge.data.munrolist.MunroListExtractor
 import com.katocoding.munrolibrarychallenge.data.munrolist.MunroListRepository
 import dagger.Module
 import dagger.Provides
@@ -12,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModue {
+object AppModule {
 
     @Singleton
     @Provides
@@ -22,7 +23,13 @@ object AppModue {
 
     @Singleton
     @Provides
+    fun providesMunroListExtractor(): MunroListExtractor = MunroListExtractor()
+
+    @Singleton
+    @Provides
     fun providesMunroListRepository(
+        @ApplicationContext context: Context,
+        munroListExtractor: MunroListExtractor,
         dataErrorHandler: DataErrorHandler
-    ) = MunroListRepository(dataErrorHandler)
+    ) = MunroListRepository(context, munroListExtractor, dataErrorHandler)
 }

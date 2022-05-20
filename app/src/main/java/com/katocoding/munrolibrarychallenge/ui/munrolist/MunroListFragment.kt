@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.katocoding.munrolibrarychallenge.databinding.FragmentMunrolistBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,14 +22,29 @@ class MunroListFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMunrolistBinding.inflate(inflater, container, false)
+        initViews()
+        initObservers()
         return binding.root
+    }
+
+    fun initViews() {
+
+    }
+
+    fun initObservers() {
+        viewModel.munroList.observe(viewLifecycleOwner) {
+
+        }
+        viewModel.navigationEvent.observe(viewLifecycleOwner) {
+            it(findNavController())
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel
+        viewModel.getMunroList()
     }
 
     override fun onDestroyView() {
