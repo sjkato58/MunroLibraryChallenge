@@ -8,3 +8,8 @@ const val MUNRODATA_NAME = "Name"
 const val MUNRODATA_HEIGHTM = "Height (m)"
 const val MUNRODATA_GRIDREF = "Grid Ref"
 const val MUNRODATA_HILLCATEGORY = "Post 1997"
+
+const val MUNRODATA_HILLCATEGORY_MON = "MON"
+const val MUNRODATA_HILLCATEGORY_TOP = "TOP"
+
+const val CHECK_HTTP = "http"

@@ -5,10 +5,7 @@ import com.katocoding.munrolibrarychallenge.util.isInt
 
 class MunroListExtractor {
 
-    fun extractMunroListData(records: MutableList<MutableList<String>>): List<MunroModel> {
-        val cleanRecords = checkStreetMap(records)
-        return extractMunroLists(records[0], cleanRecords)
-    }
+    fun extractMunroListData(records: MutableList<MutableList<String>>): List<MunroModel> = extractMunroLists(records[0], checkStreetMap(records))
 
     fun extractMunroLists(
         headerList: MutableList<String>,
@@ -18,13 +15,15 @@ class MunroListExtractor {
         val heightMPos = getHeaderListItem(headerList, MUNRODATA_HEIGHTM, 9)
         val gridRefPos = getHeaderListItem(headerList, MUNRODATA_GRIDREF, 13)
         val hillCategoryPos = getHeaderListItem(headerList, MUNRODATA_HILLCATEGORY, 27)
-        return records.map {
-            MunroModel(
-                name = it[namePos],
-                heightM = it[heightMPos].toDouble(),
-                gridReference = it[gridRefPos],
-                hillCategory = it[hillCategoryPos]
-            )
+        return records.mapNotNull {
+            if (it[hillCategoryPos].isNotBlank()) {
+                MunroModel(
+                    name = it[namePos],
+                    heightM = it[heightMPos].toDouble(),
+                    gridReference = it[gridRefPos],
+                    hillCategory = stringToHillCategoryType(it[hillCategoryPos])
+                )
+            } else null
         }
     }
 
@@ -83,5 +82,5 @@ class MunroListExtractor {
         geographPosition: Int,
         hillBaggingPosition: Int
     ) = ((streetMapPosition + 1 == geographPosition || streetMapPosition + 1 == hillBaggingPosition)
-            && !mutableList[streetMapPosition + 1].startsWith("http"))
+            && !mutableList[streetMapPosition + 1].startsWith(CHECK_HTTP))
 }
