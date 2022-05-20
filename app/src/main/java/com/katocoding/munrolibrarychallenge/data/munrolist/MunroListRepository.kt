@@ -31,9 +31,9 @@ class MunroListRepository @Inject constructor(
         val records = mutableListOf<MutableList<String>>()
         val inputStream = context.assets.open("munrotab_v6.2.csv")
         val scanner = Scanner(inputStream)
-        scanner.use { scanner ->
-            while (scanner.hasNextLine()) {
-                records.add(getRecordFromLine(scanner.nextLine()))
+        scanner.use {
+            while (it.hasNextLine()) {
+                records.add(getRecordFromLine(it.nextLine()))
             }
         }
         return records

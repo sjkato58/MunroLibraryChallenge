@@ -21,7 +21,7 @@ class MunroListExtractor {
         return records.map {
             MunroModel(
                 name = it[namePos],
-                heightM = it[heightMPos],
+                heightM = it[heightMPos].toDouble(),
                 gridReference = it[gridRefPos],
                 hillCategory = it[hillCategoryPos]
             )

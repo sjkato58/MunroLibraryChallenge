@@ -34,7 +34,7 @@ class MunroListViewModel @Inject constructor(
     }
 
     fun publishMunroListViewState(responseList: List<MunroModel>) {
-        Log.w("seiji", "record-${responseList.size}")
+        Log.w("seiji", "recordSize: ${responseList.size}")
         /*responseList.forEachIndexed { index, mutableList ->
             Log.w("seiji", "record-$index: $mutableList")
         }*/
