@@ -2,6 +2,8 @@ package com.katocoding.munrolibrarychallenge.data.munrolist
 
 import android.content.Context
 import com.katocoding.munrolibrarychallenge.data.ApiResponse
+import com.katocoding.munrolibrarychallenge.data.DELIMITER_COMMA
+import com.katocoding.munrolibrarychallenge.data.MUNRO_CSV_FILE
 import com.katocoding.munrolibrarychallenge.data.errors.DataErrorHandler
 import com.katocoding.munrolibrarychallenge.util.isInt
 import dagger.hilt.android.scopes.ActivityScoped
@@ -29,7 +31,7 @@ class MunroListRepository @Inject constructor(
 
     fun obtainMunroRecordsFromCSV(): MutableList<MutableList<String>> {
         val records = mutableListOf<MutableList<String>>()
-        val inputStream = context.assets.open("munrotab_v6.2.csv")
+        val inputStream = context.assets.open(MUNRO_CSV_FILE)
         val scanner = Scanner(inputStream)
         scanner.use {
             while (it.hasNextLine()) {
@@ -42,7 +44,7 @@ class MunroListRepository @Inject constructor(
     fun getRecordFromLine(line: String): MutableList <String> {
         val values = mutableListOf<String>()
         val rowScanner = Scanner(line)
-        rowScanner.useDelimiter(",")
+        rowScanner.useDelimiter(DELIMITER_COMMA)
         while (rowScanner.hasNext()) {
             values.add(rowScanner.next())
         }

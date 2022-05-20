@@ -13,3 +13,7 @@ const val MUNRODATA_HILLCATEGORY_MON = "MON"
 const val MUNRODATA_HILLCATEGORY_TOP = "TOP"
 
 const val CHECK_HTTP = "http"
+
+const val DELIMITER_COMMA = ","
+
+const val MUNRO_CSV_FILE = "munrotab_v6.2.csv"
