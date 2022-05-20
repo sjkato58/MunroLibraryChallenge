@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MunroLibraryChallenge</string>
+
+    <string name="d_filter">Filter</string>
 </resources>
