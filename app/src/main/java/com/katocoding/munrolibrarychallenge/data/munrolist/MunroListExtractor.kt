@@ -2,8 +2,11 @@ package com.katocoding.munrolibrarychallenge.data.munrolist
 
 import com.katocoding.munrolibrarychallenge.data.*
 import com.katocoding.munrolibrarychallenge.util.isInt
+import dagger.hilt.android.scopes.ActivityScoped
+import javax.inject.Inject
 
-class MunroListExtractor {
+@ActivityScoped
+class MunroListExtractor @Inject constructor(){
 
     fun extractMunroListData(records: MutableList<MutableList<String>>): List<MunroModel> = extractMunroLists(records[0], checkStreetMap(records))
 

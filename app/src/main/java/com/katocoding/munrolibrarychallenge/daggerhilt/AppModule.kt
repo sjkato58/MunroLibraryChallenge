@@ -4,6 +4,7 @@ import android.content.Context
 import com.katocoding.munrolibrarychallenge.data.errors.DataErrorHandler
 import com.katocoding.munrolibrarychallenge.data.munrolist.MunroListExtractor
 import com.katocoding.munrolibrarychallenge.data.munrolist.MunroListRepository
+import com.katocoding.munrolibrarychallenge.data.munrolist.filter.MunroListFilter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,9 +28,14 @@ object AppModule {
 
     @Singleton
     @Provides
+    fun providesMunroListFilter(): MunroListFilter = MunroListFilter()
+
+    @Singleton
+    @Provides
     fun providesMunroListRepository(
         @ApplicationContext context: Context,
         munroListExtractor: MunroListExtractor,
+        munroListFilter: MunroListFilter,
         dataErrorHandler: DataErrorHandler
-    ) = MunroListRepository(context, munroListExtractor, dataErrorHandler)
+    ) = MunroListRepository(context, munroListExtractor, munroListFilter, dataErrorHandler)
 }

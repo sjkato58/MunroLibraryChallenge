@@ -5,6 +5,8 @@ import com.katocoding.munrolibrarychallenge.data.ApiResponse
 import com.katocoding.munrolibrarychallenge.data.DELIMITER_COMMA
 import com.katocoding.munrolibrarychallenge.data.MUNRO_CSV_FILE
 import com.katocoding.munrolibrarychallenge.data.errors.DataErrorHandler
+import com.katocoding.munrolibrarychallenge.data.munrolist.filter.FilterModel
+import com.katocoding.munrolibrarychallenge.data.munrolist.filter.MunroListFilter
 import com.katocoding.munrolibrarychallenge.util.isInt
 import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.CoroutineDispatcher
@@ -17,16 +19,18 @@ import javax.inject.Inject
 class MunroListRepository @Inject constructor(
     private val context: Context,
     private val munroListExtractor: MunroListExtractor,
+    private val munroListFilter: MunroListFilter,
     private val dataErrorHandler: DataErrorHandler,
     private val iODispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
     suspend fun getMunroRecords(
-
+        filterModel: FilterModel
     ): ApiResponse<List<MunroModel>> = withContext(iODispatcher) {
         val rawRecords = obtainMunroRecordsFromCSV()
         val extractedRecords = munroListExtractor.extractMunroListData(rawRecords)
-        ApiResponse.Success(extractedRecords)
+        val filteredRecords = munroListFilter.checkFilterData(filterModel, extractedRecords)
+        ApiResponse.Success(filteredRecords)
     }
 
     fun obtainMunroRecordsFromCSV(): MutableList<MutableList<String>> {

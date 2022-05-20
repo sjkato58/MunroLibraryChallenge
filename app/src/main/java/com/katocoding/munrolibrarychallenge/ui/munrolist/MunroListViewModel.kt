@@ -8,6 +8,7 @@ import com.katocoding.munrolibrarychallenge.base.BaseViewModel
 import com.katocoding.munrolibrarychallenge.data.ApiResponse
 import com.katocoding.munrolibrarychallenge.data.munrolist.MunroListRepository
 import com.katocoding.munrolibrarychallenge.data.munrolist.MunroModel
+import com.katocoding.munrolibrarychallenge.data.munrolist.filter.FilterModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,9 +21,11 @@ class MunroListViewModel @Inject constructor(
     private val _munroList = MutableLiveData<List<MunroListViewState>>()
     val munroList: LiveData<List<MunroListViewState>> get() = _munroList
 
+    var filterModel: FilterModel = FilterModel()
+
     fun getMunroList() {
         viewModelScope.launch {
-            when (val apiResponse = munroListRepository.getMunroRecords()) {
+            when (val apiResponse = munroListRepository.getMunroRecords(filterModel)) {
                 is ApiResponse.Success -> {
                     apiResponse.data?.let { responseList ->
                         publishMunroListViewState(responseList)
