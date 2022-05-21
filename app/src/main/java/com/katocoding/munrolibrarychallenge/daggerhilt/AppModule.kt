@@ -24,18 +24,16 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providesMunroListExtractor(): MunroListExtractor = MunroListExtractor()
+    fun providesMunroListFilter(): MunroListFilter = MunroListFilter()
 
     @Singleton
     @Provides
-    fun providesMunroListFilter(): MunroListFilter = MunroListFilter()
+    fun providesMunroListExtractor(): MunroListExtractor = MunroListExtractor()
 
     @Singleton
     @Provides
     fun providesMunroListRepository(
         @ApplicationContext context: Context,
-        munroListExtractor: MunroListExtractor,
-        munroListFilter: MunroListFilter,
-        dataErrorHandler: DataErrorHandler
-    ) = MunroListRepository(context, munroListExtractor, munroListFilter, dataErrorHandler)
+        munroListExtractor: MunroListExtractor
+    ) = MunroListRepository(context, munroListExtractor)
 }

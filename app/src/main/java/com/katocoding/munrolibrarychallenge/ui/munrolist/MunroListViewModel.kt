@@ -9,13 +9,15 @@ import com.katocoding.munrolibrarychallenge.data.ApiResponse
 import com.katocoding.munrolibrarychallenge.data.munrolist.MunroListRepository
 import com.katocoding.munrolibrarychallenge.data.munrolist.MunroModel
 import com.katocoding.munrolibrarychallenge.data.munrolist.filter.FilterModel
+import com.katocoding.munrolibrarychallenge.data.munrolist.filter.MunroListFilter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MunroListViewModel @Inject constructor(
-    private val munroListRepository: MunroListRepository
+    private val munroListRepository: MunroListRepository,
+    private val munroListFilter: MunroListFilter
 ): BaseViewModel() {
 
     private val _munroList = MutableLiveData<List<MunroListViewState>>()
@@ -25,10 +27,10 @@ class MunroListViewModel @Inject constructor(
 
     fun getMunroList() {
         viewModelScope.launch {
-            when (val apiResponse = munroListRepository.getMunroRecords(filterModel)) {
+            when (val apiResponse = munroListRepository.getMunroRecords()) {
                 is ApiResponse.Success -> {
                     apiResponse.data?.let { responseList ->
-                        publishMunroListViewState(responseList)
+                        filterMunroListData(responseList)
                     }
                 }
                 is ApiResponse.Error -> publishMunroListErrorViewState(apiResponse)
@@ -36,7 +38,13 @@ class MunroListViewModel @Inject constructor(
         }
     }
 
+    fun filterMunroListData(responseList: List<MunroModel>) {
+        munroListFilter.checkFilterData(filterModel, responseList)
+
+    }
+
     fun publishMunroListViewState(responseList: List<MunroModel>) {
+
         Log.w("seiji", "recordSize: ${responseList.size}")
         /*responseList.forEachIndexed { index, mutableList ->
             Log.w("seiji", "record-$index: $mutableList")

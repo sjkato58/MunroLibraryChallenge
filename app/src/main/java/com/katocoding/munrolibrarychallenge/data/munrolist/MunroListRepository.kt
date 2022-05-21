@@ -19,18 +19,13 @@ import javax.inject.Inject
 class MunroListRepository @Inject constructor(
     private val context: Context,
     private val munroListExtractor: MunroListExtractor,
-    private val munroListFilter: MunroListFilter,
-    private val dataErrorHandler: DataErrorHandler,
     private val iODispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
-    suspend fun getMunroRecords(
-        filterModel: FilterModel
-    ): ApiResponse<List<MunroModel>> = withContext(iODispatcher) {
+    suspend fun getMunroRecords(): ApiResponse<List<MunroModel>> = withContext(iODispatcher) {
         val rawRecords = obtainMunroRecordsFromCSV()
         val extractedRecords = munroListExtractor.extractMunroListData(rawRecords)
-        val filteredRecords = munroListFilter.checkFilterData(filterModel, extractedRecords)
-        ApiResponse.Success(filteredRecords)
+        ApiResponse.Success(extractedRecords)
     }
 
     fun obtainMunroRecordsFromCSV(): MutableList<MutableList<String>> {
