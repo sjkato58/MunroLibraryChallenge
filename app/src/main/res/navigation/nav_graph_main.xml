@@ -9,5 +9,19 @@
         android:id="@+id/munroListFragment"
         android:name="com.katocoding.munrolibrarychallenge.ui.munrolist.MunroListFragment"
         android:label="MunroListFragment"
-        tools:layout="@layout/fragment_munrolist" />
+        tools:layout="@layout/fragment_munrolist" >
+        <action
+            android:id="@+id/action_munroListFragment_to_munroFilterFragment"
+            app:destination="@id/munroFilterFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/munroFilterFragment"
+        android:name="com.katocoding.munrolibrarychallenge.ui.munrofilter.MunroFilterFragment"
+        android:label="MunroFilterFragment"
+        tools:layout="@layout/fragment_munrofilter">
+        <argument
+            android:name="filtermodelstring"
+            app:argType="string" />
+    </fragment>
 </navigation>

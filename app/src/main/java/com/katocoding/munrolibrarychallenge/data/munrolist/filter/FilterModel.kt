@@ -13,7 +13,7 @@ data class FilterModel(
 ) {
     fun convertToString() = "${hillCategory.name}{#}${sortHeightMType.name}{#}${sortAlphabetType.name}{#}$sortLimit{#}$maxHeight{#}$minHeight"
 
-    fun convertFromString(convertedString: String) {
+    constructor(convertedString: String): this() {
         val divided = convertedString.split("{#}").toTypedArray()
         hillCategory = HillCategoryType.valueOf(divided[0])
         sortHeightMType = SortType.valueOf(divided[1])

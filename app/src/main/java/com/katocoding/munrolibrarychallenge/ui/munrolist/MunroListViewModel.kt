@@ -66,9 +66,8 @@ class MunroListViewModel @Inject constructor(
 
     fun navigateToMunroFilter() {
         val converted = filterModel.convertToString()
-        Log.e("seiji", "converted: $converted")
-        filterModel.convertFromString(converted)
-        Log.w("seiji", "filterModel: $filterModel")
+        val destination = MunroListFragmentDirections.actionMunroListFragmentToMunroFilterFragment(converted)
+        navigateInDirection(destination)
     }
 
     fun updateFilterModel(updatedFilterModel: FilterModel) {
