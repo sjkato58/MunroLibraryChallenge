@@ -64,6 +64,13 @@ class MunroListViewModel @Inject constructor(
         _munroList.value = listOf(MunroListViewState(showError = true, errorMessage = apiResponse.message ?: ""))
     }
 
+    fun navigateToMunroFilter() {
+        val converted = filterModel.convertToString()
+        Log.e("seiji", "converted: $converted")
+        filterModel.convertFromString(converted)
+        Log.w("seiji", "filterModel: $filterModel")
+    }
+
     fun updateFilterModel(updatedFilterModel: FilterModel) {
         filterModel = FilterModel(
             updatedFilterModel.hillCategory,

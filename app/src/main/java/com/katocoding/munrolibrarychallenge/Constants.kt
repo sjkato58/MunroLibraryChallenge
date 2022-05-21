@@ -4,7 +4,7 @@ const val TAG_CORE = "CoreApp"
 const val TAG_TEST = "TestApp"
 const val ISDEBUG = true
 
-const val THREE_MILLISECONDS = 3000L
+const val KEY_UPDATE_MUNRO_FILTER = "key_update_munro_filter"
 
 const val DEFAULT_DOUBLE = -99.99
 const val DEFAULT_INTEGER = -999
