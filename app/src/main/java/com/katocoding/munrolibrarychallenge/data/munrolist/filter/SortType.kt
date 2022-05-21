@@ -1,5 +1,5 @@
 package com.katocoding.munrolibrarychallenge.data.munrolist.filter
 
-enum class SortAlphabetType {
+enum class SortType {
     Ascending, Descending, Inactive
 }
