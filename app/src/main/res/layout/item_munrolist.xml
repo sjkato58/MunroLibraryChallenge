@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent" >
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_munrolist_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:cardMaxElevation="6dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp" >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_name_label"
+                style="@style/AppCore.Subhead2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:padding="4dp"
+                android:text="@string/d_label_name"
+                app:layout_constraintEnd_toStartOf="@+id/tv_name_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_name_description"
+                style="@style/AppCore.Subhead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center|end"
+                android:padding="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_name_label"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/d_demo_name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_height_label"
+                style="@style/AppCore.Subhead2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:padding="4dp"
+                android:text="@string/d_label_height"
+                app:layout_constraintEnd_toStartOf="@+id/tv_height_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_name_label" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_height_description"
+                style="@style/AppCore.Subhead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center|end"
+                android:padding="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_height_label"
+                app:layout_constraintTop_toBottomOf="@id/tv_name_description"
+                tools:text="@string/d_demo_height" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_hillcategory_label"
+                style="@style/AppCore.Subhead2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:padding="4dp"
+                android:text="@string/d_label_hillcategory"
+                app:layout_constraintEnd_toStartOf="@+id/tv_hillcategory_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_height_label" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_hillcategory_description"
+                style="@style/AppCore.Subhead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center|end"
+                android:padding="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_hillcategory_label"
+                app:layout_constraintTop_toBottomOf="@id/tv_height_description"
+                tools:text="@string/d_demo_hillcategory" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_gridreference_label"
+                style="@style/AppCore.Subhead2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:padding="4dp"
+                android:text="@string/d_label_gridreference"
+                app:layout_constraintEnd_toStartOf="@+id/tv_gridreference_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_hillcategory_label" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_gridreference_description"
+                style="@style/AppCore.Subhead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center|end"
+                android:padding="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_gridreference_label"
+                app:layout_constraintTop_toBottomOf="@id/tv_hillcategory_description"
+                tools:text="@string/d_demo_gridreference" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

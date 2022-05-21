@@ -12,12 +12,12 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
-    <style name="AppCore.Title2" parent="AppCore.Title" >
-        <item name="android:textStyle">bold</item>
-    </style>
-
     <style name="AppCore.Subhead" parent="android:TextAppearance.Material.Subhead" >
         <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="AppCore.Subhead2" parent="AppCore.Subhead" >
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="AppCore.Subhead.Tablayout" parent="android:TextAppearance.Material.Subhead" >

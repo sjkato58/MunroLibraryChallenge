@@ -2,4 +2,14 @@
     <string name="app_name">MunroLibraryChallenge</string>
 
     <string name="d_filter">Filter</string>
+
+    <string name="d_label_name">Name:</string>
+    <string name="d_label_height">Height (m):</string>
+    <string name="d_label_hillcategory">Hill Category:</string>
+    <string name="d_label_gridreference">Grid Reference:</string>
+
+    <string name="d_demo_name">Ben Chonzie</string>
+    <string name="d_demo_height">974</string>
+    <string name="d_demo_hillcategory">Munro</string>
+    <string name="d_demo_gridreference">ZF094212</string>
 </resources>
