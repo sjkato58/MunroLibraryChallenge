@@ -2,6 +2,10 @@
     <string name="app_name">MunroLibraryChallenge</string>
 
     <string name="d_filter">Filter</string>
+    <string name="d_back">Back</string>
+    <string name="d_done">Done</string>
+
+    <string name="t_filter_options">Filtering Options</string>
 
     <string name="d_munro">Munro</string>
     <string name="d_munrotop">Munro Top</string>
