@@ -39,8 +39,11 @@ class MunroListViewModel @Inject constructor(
     }
 
     fun filterMunroListData(responseList: List<MunroModel>) {
-        munroListFilter.checkFilterData(filterModel, responseList)
-
+        val filteredRecords = munroListFilter.checkFilterData(filterModel, responseList)
+        Log.w("seiji", "recordSize: ${filteredRecords.size}")
+        filteredRecords.forEachIndexed { index, mutableList ->
+            Log.w("seiji", "record-$index: $mutableList")
+        }
     }
 
     fun publishMunroListViewState(responseList: List<MunroModel>) {
