@@ -3,6 +3,9 @@
 
     <string name="d_filter">Filter</string>
 
+    <string name="d_munro">Munro</string>
+    <string name="d_munrotop">Munro Top</string>
+
     <string name="d_label_name">Name:</string>
     <string name="d_label_height">Height (m):</string>
     <string name="d_label_hillcategory">Hill Category:</string>
