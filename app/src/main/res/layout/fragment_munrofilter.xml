@@ -124,6 +124,139 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_hillcategory_title" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sort_height_title"
+                style="@style/AppCore.Subhead2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:text="@string/d_sort_height"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spv_hillcategory" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spv_sort_height"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="16dp"
+                android:contentDescription="@string/d_hint_height"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sort_height_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sort_alphabetic_title"
+                style="@style/AppCore.Subhead2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:text="@string/d_sort_alphabetic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spv_sort_height" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spv_sort_alphabetic"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="16dp"
+                android:contentDescription="@string/d_hint_alphabetic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sort_alphabetic_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_filter_sortmax_title"
+                style="@style/AppCore.Subhead2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:text="@string/d_filter_sortmax"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spv_sort_alphabetic" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spv_filter_sortmax"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="16dp"
+                android:contentDescription="@string/d_hint_sortmax"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_filter_sortmax_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sort_maxheight_title"
+                style="@style/AppCore.Subhead2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:text="@string/d_filter_maxheight"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spv_filter_sortmax" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_filter_maxheight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
+                app:errorEnabled="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_sort_maxheight_title" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_filter_maxheight"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:maxLines="1"
+                    android:inputType="textNoSuggestions"
+                    android:imeOptions="actionNext" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sort_minheight_title"
+                style="@style/AppCore.Subhead2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:text="@string/d_filter_minheight"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_filter_maxheight" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_filter_minheight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="16dp"
+                app:errorEnabled="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_sort_minheight_title" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_filter_minheight"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:maxLines="1"
+                    android:inputType="textNoSuggestions"
+                    android:imeOptions="actionDone" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

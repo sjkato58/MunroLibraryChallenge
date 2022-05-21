@@ -18,6 +18,14 @@
     <string name="d_filter_description">Please try filtering the data you desire with the options below.</string>
     <string name="d_filter_hillcategory">Select a Hill Category:</string>
     <string name="d_hint_hillcategory">Hill Category</string>
+    <string name="d_sort_height">Sort by Height in meters:</string>
+    <string name="d_hint_height">Height (m) sort</string>
+    <string name="d_sort_alphabetic">Sort Alphabetically:</string>
+    <string name="d_hint_alphabetic">Alphabetic sort</string>
+    <string name="d_filter_sortmax">Maximum number of records:</string>
+    <string name="d_hint_sortmax">Max records</string>
+    <string name="d_filter_maxheight">Filter by Maximum Height in meters:</string>
+    <string name="d_filter_minheight">Filter by Minimum Height in meters:</string>
 
     <string name="d_demo_name">Ben Chonzie</string>
     <string name="d_demo_height">974</string>
