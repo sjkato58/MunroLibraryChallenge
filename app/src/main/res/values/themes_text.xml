@@ -23,4 +23,8 @@
     <style name="AppCore.Subhead.Tablayout" parent="android:TextAppearance.Material.Subhead" >
         <item name="android:textColor">@android:color/white</item>
     </style>
+
+    <style name="AppCore.Body1" parent="android:TextAppearance.Material.Body1" >
+        <item name="android:textColor">@android:color/black</item>
+    </style>
 </resources>

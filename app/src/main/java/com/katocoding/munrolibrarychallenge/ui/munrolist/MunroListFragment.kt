@@ -49,10 +49,10 @@ class MunroListFragment: Fragment() {
                 }
             }
         }
-        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Boolean>(
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(
             KEY_UPDATE_MUNRO_FILTER)?.observe(viewLifecycleOwner) {
-
-            findNavController().currentBackStackEntry?.savedStateHandle?.remove<Boolean>(KEY_UPDATE_MUNRO_FILTER)
+            viewModel.updateFilterModel(it)
+            findNavController().currentBackStackEntry?.savedStateHandle?.remove<String>(KEY_UPDATE_MUNRO_FILTER)
         }
         viewModel.navigationEvent.observe(viewLifecycleOwner) {
             it(findNavController())

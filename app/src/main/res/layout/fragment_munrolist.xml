@@ -36,21 +36,24 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_toolbar_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     style="@style/AppCore.Title.Tablayout"
                     android:paddingHorizontal="16dp"
+                    android:gravity="start|center"
                     android:text="@string/app_name"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_toolbar_filter"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_toolbar_filter"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     style="@style/AppCore.Subhead.Tablayout"
                     android:padding="8dp"
+                    android:gravity="center"
                     android:text="@string/d_filter"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

@@ -70,15 +70,9 @@ class MunroListViewModel @Inject constructor(
         navigateInDirection(destination)
     }
 
-    fun updateFilterModel(updatedFilterModel: FilterModel) {
-        filterModel = FilterModel(
-            updatedFilterModel.hillCategory,
-            updatedFilterModel.sortHeightMType,
-            updatedFilterModel.sortAlphabetType,
-            updatedFilterModel.sortLimit,
-            updatedFilterModel.maxHeight,
-            updatedFilterModel.minHeight
-        )
+    fun updateFilterModel(updatedFilterModel: String) {
+        filterModel = FilterModel(updatedFilterModel)
+        getMunroList()
     }
 
 }

@@ -15,6 +15,10 @@
     <string name="d_label_hillcategory">Hill Category:</string>
     <string name="d_label_gridreference">Grid Reference:</string>
 
+    <string name="d_filter_description">Please try filtering the data you desire with the options below.</string>
+    <string name="d_filter_hillcategory">Select a Hill Category:</string>
+    <string name="d_hint_hillcategory">Hill Category</string>
+
     <string name="d_demo_name">Ben Chonzie</string>
     <string name="d_demo_height">974</string>
     <string name="d_demo_hillcategory">Munro</string>
