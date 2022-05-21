@@ -23,7 +23,7 @@ class MunroListViewModel @Inject constructor(
     private val _munroList = MutableLiveData<List<MunroListViewState>>()
     val munroList: LiveData<List<MunroListViewState>> get() = _munroList
 
-    var filterModel: FilterModel = FilterModel()
+    private var filterModel: FilterModel = FilterModel()
 
     fun getMunroList() {
         viewModelScope.launch {
@@ -38,18 +38,24 @@ class MunroListViewModel @Inject constructor(
         }
     }
 
-    fun filterMunroListData(responseList: List<MunroModel>) {
-        val filteredRecords = munroListFilter.checkFilterData(filterModel, responseList)
-        Log.w("seiji", "recordSize: ${filteredRecords.size}")
+    fun filterMunroListData(recordList: List<MunroModel>) {
+        when (val apiResponse = munroListFilter.checkFilterData(filterModel, recordList)) {
+            is ApiResponse.Success -> {
+                apiResponse.data?.let { responseList ->
+                    publishMunroListViewState(responseList)
+                }
+            }
+            is ApiResponse.Error -> publishMunroListErrorViewState(apiResponse)
+        }
+        /*Log.w("seiji", "recordSize: ${filteredRecords.size}")
         filteredRecords.forEachIndexed { index, mutableList ->
             Log.w("seiji", "record-$index: $mutableList")
-        }
+        }*/
     }
 
-    fun publishMunroListViewState(responseList: List<MunroModel>) {
-
-        Log.w("seiji", "recordSize: ${responseList.size}")
-        /*responseList.forEachIndexed { index, mutableList ->
+    fun publishMunroListViewState(recordList: List<MunroModel>) {
+        Log.w("seiji", "recordSize: ${recordList.size}")
+        /*recordList.forEachIndexed { index, mutableList ->
             Log.w("seiji", "record-$index: $mutableList")
         }*/
     }
@@ -58,5 +64,15 @@ class MunroListViewModel @Inject constructor(
 
     }
 
+    fun updateFilterModel(updatedFilterModel: FilterModel) {
+        filterModel = FilterModel(
+            updatedFilterModel.hillCategory,
+            updatedFilterModel.sortHeightMType,
+            updatedFilterModel.sortAlphabetType,
+            updatedFilterModel.sortLimit,
+            updatedFilterModel.maxHeight,
+            updatedFilterModel.minHeight
+        )
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.katocoding.munrolibrarychallenge.data.munrolist.filter
 
 import com.katocoding.munrolibrarychallenge.DEFAULT_DOUBLE
+import com.katocoding.munrolibrarychallenge.data.ApiResponse
 import com.katocoding.munrolibrarychallenge.data.munrolist.MunroModel
 import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
@@ -13,14 +14,14 @@ class MunroListFilter @Inject constructor(
     fun checkFilterData(
         filterModel: FilterModel,
         records: List<MunroModel>
-    ): List<MunroModel> {
+    ): ApiResponse<List<MunroModel>> {
         val hillCategoryFilteredList = filterRecordsByType(FilterByType.HillCategory, filterModel, records)
         val maxHeightFilteredList = filterRecordsByType(FilterByType.MaxHeight, filterModel, hillCategoryFilteredList)
         val minHeightFilteredList = filterRecordsByType(FilterByType.MinHeight, filterModel, maxHeightFilteredList)
         val alphabeticallySortedList = sortRecordsByType(SortByType.Alphabetically, filterModel, minHeightFilteredList)
         val heightSortedList = sortRecordsByType(SortByType.Height, filterModel, alphabeticallySortedList)
         val sortLimitList = filterRecordsByType(FilterByType.SortLimit, filterModel, heightSortedList)
-        return sortLimitList
+        return ApiResponse.Success(sortLimitList)
     }
 
     fun filterRecordsByType(
