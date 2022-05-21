@@ -30,12 +30,19 @@ class MunroFilterViewModel @Inject constructor(
         hillCategoryType: String,
         sortHeightMType: String,
         sortAlphabetType: String,
-        sortLimit: Int,
+        sortLimit: String,
         maxHeight: Double,
         minHeight: Double
     ) {
         val filterModel = _filterModel.value
-        filterModel?.hillCategory = HillCategoryType.from(hillCategoryType)
+        filterModel?.let {
+            it.hillCategory = HillCategoryType.from(hillCategoryType)
+            it.sortHeightMType = SortType.from(sortHeightMType)
+            it.sortAlphabetType = SortType.from(sortAlphabetType)
+            it.sortLimit = sortLimit.toInt()
+            it.maxHeight = maxHeight
+            it.minHeight = minHeight
+        }
         _filterModel.postValue(filterModel)
     }
 

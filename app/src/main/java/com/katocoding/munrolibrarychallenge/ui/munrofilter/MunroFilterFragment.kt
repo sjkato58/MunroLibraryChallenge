@@ -40,12 +40,23 @@ class MunroFilterFragment: Fragment() {
 
     private fun initViews() {
 
-        binding.tvToolbarDone.setOnClickListener {
+        binding.ivToolbarBack.setOnClickListener { closingFilterFragment(false) }
+        binding.tvToolbarDone.setOnClickListener { closingFilterFragment(true) }
+        val list = requireContext().resources.getStringArray(R.array.sa_hillcategory)
+        binding.spvHillcategory.adapter = ArrayAdapter(requireContext(), R.layout.item_spinner_simple, list)
+        val sortList = requireContext().resources.getStringArray(R.array.sa_sorttype)
+        binding.spvSortHeight.adapter = ArrayAdapter(requireContext(), R.layout.item_spinner_simple, sortList)
+        binding.spvSortAlphabetic.adapter = ArrayAdapter(requireContext(), R.layout.item_spinner_simple, sortList)
+        val sortMaxList = requireContext().resources.getStringArray(R.array.sa_maxsort)
+        binding.spvFilterSortmax.adapter = ArrayAdapter(requireContext(), R.layout.item_spinner_simple, sortMaxList)
+    }
 
+    fun closingFilterFragment(wasDoneClick: Boolean) {
+        if (wasDoneClick)  {
             val hillCategory = binding.spvHillcategory.selectedItem.toString()
-            val sortHeightMType = ""
-            val sortAlphabetType = ""
-            val sortLimit = 10
+            val sortHeightMType = binding.spvSortHeight.selectedItem.toString()
+            val sortAlphabetType = binding.spvSortAlphabetic.selectedItem.toString()
+            val sortLimit = binding.spvFilterSortmax.selectedItem.toString()
             val maxHeight = DEFAULT_DOUBLE
             val minHeight = DEFAULT_DOUBLE
 
@@ -53,10 +64,8 @@ class MunroFilterFragment: Fragment() {
 
             findNavController().previousBackStackEntry?.savedStateHandle?.set(
                 KEY_UPDATE_MUNRO_FILTER, viewModel.filterModel.value?.convertToString())
-            findNavController().popBackStack()
         }
-        val list = requireContext().resources.getStringArray(R.array.sa_hillcategory)
-        binding.spvHillcategory.adapter = ArrayAdapter(requireContext(), R.layout.item_spinner_simple, list)
+        findNavController().popBackStack()
     }
 
     private fun initObservers() {
@@ -64,6 +73,13 @@ class MunroFilterFragment: Fragment() {
 
             val list = requireContext().resources.getStringArray(R.array.sa_hillcategory)
             binding.spvHillcategory.setSelection(list.indexOf(response.hillCategory.label))
+
+            val sortList = requireContext().resources.getStringArray(R.array.sa_sorttype)
+            binding.spvSortHeight.setSelection(sortList.indexOf(response.sortHeightMType.label))
+            binding.spvSortAlphabetic.setSelection(sortList.indexOf(response.sortAlphabetType.label))
+
+            val sortMaxList = requireContext().resources.getStringArray(R.array.sa_maxsort)
+            binding.spvFilterSortmax.setSelection(sortMaxList.indexOf(response.sortLimit.toString()))
         }
         viewModel.navigationEvent.observe(viewLifecycleOwner) {
             it(findNavController())
