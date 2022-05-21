@@ -47,21 +47,21 @@ class MunroListViewModel @Inject constructor(
             }
             is ApiResponse.Error -> publishMunroListErrorViewState(apiResponse)
         }
-        /*Log.w("seiji", "recordSize: ${filteredRecords.size}")
-        filteredRecords.forEachIndexed { index, mutableList ->
-            Log.w("seiji", "record-$index: $mutableList")
-        }*/
     }
 
     fun publishMunroListViewState(recordList: List<MunroModel>) {
-        Log.w("seiji", "recordSize: ${recordList.size}")
-        /*recordList.forEachIndexed { index, mutableList ->
-            Log.w("seiji", "record-$index: $mutableList")
-        }*/
+        _munroList.value = recordList.map {
+            MunroListViewState(
+                name = it.name,
+                heightM = it.heightM,
+                hillCategory = it.hillCategory,
+                gridReference = it.gridReference
+            )
+        }
     }
 
     fun publishMunroListErrorViewState(apiResponse: ApiResponse.Error<List<MunroModel>>) {
-
+        _munroList.value = listOf(MunroListViewState(showError = true, errorMessage = apiResponse.message ?: ""))
     }
 
     fun updateFilterModel(updatedFilterModel: FilterModel) {

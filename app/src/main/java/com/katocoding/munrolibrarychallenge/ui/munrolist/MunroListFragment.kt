@@ -34,8 +34,15 @@ class MunroListFragment: Fragment() {
     }
 
     fun initObservers() {
-        viewModel.munroList.observe(viewLifecycleOwner) {
+        viewModel.munroList.observe(viewLifecycleOwner) { responseList ->
+            when {
+                responseList[0].showError -> {
 
+                }
+                else -> {
+
+                }
+            }
         }
         viewModel.navigationEvent.observe(viewLifecycleOwner) {
             it(findNavController())
