@@ -59,7 +59,7 @@
                 android:text="@string/d_label_height"
                 app:layout_constraintEnd_toStartOf="@+id/tv_height_description"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_name_label" />
+                app:layout_constraintTop_toBottomOf="@id/tv_name_description" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_height_description"
@@ -83,7 +83,7 @@
                 android:text="@string/d_label_hillcategory"
                 app:layout_constraintEnd_toStartOf="@+id/tv_hillcategory_description"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_height_label" />
+                app:layout_constraintTop_toBottomOf="@id/tv_height_description" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_hillcategory_description"
@@ -107,7 +107,7 @@
                 android:text="@string/d_label_gridreference"
                 app:layout_constraintEnd_toStartOf="@+id/tv_gridreference_description"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_hillcategory_label" />
+                app:layout_constraintTop_toBottomOf="@id/tv_hillcategory_description" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_gridreference_description"
