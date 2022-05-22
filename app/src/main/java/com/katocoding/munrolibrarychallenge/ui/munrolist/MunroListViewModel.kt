@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.katocoding.munrolibrarychallenge.base.BaseViewModel
 import com.katocoding.munrolibrarychallenge.data.ApiResponse
+import com.katocoding.munrolibrarychallenge.data.errors.ErrorType
 import com.katocoding.munrolibrarychallenge.data.munrolist.MunroListRepository
 import com.katocoding.munrolibrarychallenge.data.munrolist.MunroModel
 import com.katocoding.munrolibrarychallenge.data.munrolist.filter.FilterModel
@@ -71,7 +72,7 @@ class MunroListViewModel @Inject constructor(
     }
 
     fun publishMunroListErrorViewState(apiResponse: ApiResponse.Error<List<MunroModel>>) {
-        _munroList.value = listOf(MunroListViewState(showError = true, errorMessage = apiResponse.message ?: ""))
+        _munroList.value = listOf(MunroListViewState(showError = true, errorType = apiResponse.errorType ?: ErrorType.NONE))
     }
 
     fun navigateToMunroFilter() {

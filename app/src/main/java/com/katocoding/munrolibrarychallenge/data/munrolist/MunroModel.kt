@@ -12,9 +12,3 @@ data class MunroModel(
     val hillCategory: HillCategoryType = HillCategoryType.Munro,
     val gridReference: String = DEFAULT_STRING
 )
-
-fun stringToHillCategoryType(hillCategory: String) = when {
-    (hillCategory == MUNRODATA_HILLCATEGORY_TOP) -> HillCategoryType.MunroTop
-    (hillCategory == MUNRODATA_HILLCATEGORY_MON) -> HillCategoryType.Munro
-    else -> HillCategoryType.Munro
-}

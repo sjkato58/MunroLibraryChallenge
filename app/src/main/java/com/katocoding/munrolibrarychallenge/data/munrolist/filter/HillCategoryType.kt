@@ -5,6 +5,7 @@ enum class HillCategoryType(val label: String) {
 
     companion object {
         fun from(findValue: String): HillCategoryType = values().first { it.label == findValue }
+        fun fromOrNull(findValue: String): HillCategoryType? = values().firstOrNull { it.label == findValue }
     }
 
     override fun toString(): String {

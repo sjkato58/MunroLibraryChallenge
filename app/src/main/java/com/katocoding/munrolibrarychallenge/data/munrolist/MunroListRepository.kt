@@ -24,8 +24,7 @@ class MunroListRepository @Inject constructor(
 
     suspend fun getMunroRecords(): ApiResponse<List<MunroModel>> = withContext(iODispatcher) {
         val rawRecords = obtainMunroRecordsFromCSV()
-        val extractedRecords = munroListExtractor.extractMunroListData(rawRecords)
-        ApiResponse.Success(extractedRecords)
+        munroListExtractor.extractMunroListData(rawRecords)
     }
 
     fun obtainMunroRecordsFromCSV(): MutableList<MutableList<String>> {
