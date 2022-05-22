@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.katocoding.munrolibrarychallenge.KEY_UPDATE_MUNRO_FILTER
 import com.katocoding.munrolibrarychallenge.data.errors.DataErrorHandler
 import com.katocoding.munrolibrarychallenge.data.munrolist.filter.FilterModel
@@ -49,7 +50,11 @@ class MunroListFragment: Fragment() {
             binding.clMunrofilterSpinnercontainer.isVisible = when {
                 responseList[0].showLoading -> true
                 responseList[0].showError -> {
-
+                    Snackbar.make(
+                        binding.root,
+                        requireContext().resources.getString(dataErrorHandler.sortCSVError(responseList[0].errorType)),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                     false
                 }
                 else -> {

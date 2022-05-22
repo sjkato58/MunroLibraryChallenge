@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="err_csv_unknown">An unknown error has occurred, please try again later</string>
+    <string name="err_csv_header_missing">There is a problem with the data file, a required header is missing.</string>
+    <string name="err_csv_name_missing">There is a problem with the data file, the name value is missing.</string>
+    <string name="err_csv_height_missing">There is a problem with the data file, the height in meters value is missing.</string>
+    <string name="err_csv_gridref_missing">There is a problem with the data file, the gridreference value is missing.</string>
+    <string name="err_csv_hillcategory_missing">There is a problem with the data file, the hillcategory value is missing.</string>
     <string name="err_max_smaller_min">Your Maximum Height is greater than the Minimum Height.  Please adjust.</string>
 </resources>
