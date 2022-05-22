@@ -1,11 +1,8 @@
 package com.katocoding.munrolibrarychallenge.ui.munrofilter
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.katocoding.munrolibrarychallenge.DEFAULT_DOUBLE
 import com.katocoding.munrolibrarychallenge.base.BaseViewModel
-import com.katocoding.munrolibrarychallenge.data.munrolist.filter.FILTER_DEFAULT
 import com.katocoding.munrolibrarychallenge.data.munrolist.filter.FilterModel
 import com.katocoding.munrolibrarychallenge.data.munrolist.filter.HillCategoryType
 import com.katocoding.munrolibrarychallenge.data.munrolist.filter.SortType
@@ -22,6 +19,14 @@ class MunroFilterViewModel @Inject constructor(
     }
     val filterModel: LiveData<FilterModel> get() = _filterModel
 
+    private val _filterErrorState = MutableLiveData<MunroFilterViewState>()
+    val filterErrorState: LiveData<MunroFilterViewState> get() = _filterErrorState
+
+    private val _filterChanged = MutableLiveData<Boolean>().apply {
+        postValue(false)
+    }
+    val filterChanged: LiveData<Boolean> get() = _filterChanged
+
     fun initFilterModel(newFilterModel: String) {
         _filterModel.postValue(FilterModel(newFilterModel))
     }
@@ -31,8 +36,8 @@ class MunroFilterViewModel @Inject constructor(
         sortHeightMType: String,
         sortAlphabetType: String,
         sortLimit: String,
-        maxHeight: Double,
-        minHeight: Double
+        maxHeight: String,
+        minHeight: String
     ) {
         val filterModel = _filterModel.value
         filterModel?.let {
@@ -40,10 +45,12 @@ class MunroFilterViewModel @Inject constructor(
             it.sortHeightMType = SortType.from(sortHeightMType)
             it.sortAlphabetType = SortType.from(sortAlphabetType)
             it.sortLimit = sortLimit.toInt()
-            it.maxHeight = maxHeight
-            it.minHeight = minHeight
+            it.maxHeight = maxHeight.toDouble()
+            it.minHeight = minHeight.toDouble()
         }
         _filterModel.postValue(filterModel)
+        _filterChanged.postValue(true)
     }
 
+    fun obtainFilterModel() = _filterModel.value
 }

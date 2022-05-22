@@ -1,6 +1,8 @@
 package com.katocoding.munrolibrarychallenge.ui.munrofilter
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -40,8 +42,17 @@ class MunroFilterFragment: Fragment() {
 
     private fun initViews() {
 
-        binding.ivToolbarBack.setOnClickListener { closingFilterFragment(false) }
-        binding.tvToolbarDone.setOnClickListener { closingFilterFragment(true) }
+        binding.ivToolbarBack.setOnClickListener { findNavController().popBackStack() }
+        binding.bMunrofilterSave.setOnClickListener {
+            val hillCategory = binding.spvHillcategory.selectedItem.toString()
+            val sortHeightMType = binding.spvSortHeight.selectedItem.toString()
+            val sortAlphabetType = binding.spvSortAlphabetic.selectedItem.toString()
+            val sortLimit = binding.spvFilterSortmax.selectedItem.toString()
+            val maxHeight = binding.tietFilterMaxheight.text.toString()
+            val minHeight = binding.tietFilterMinheight.text.toString()
+
+            viewModel.updateFilterModel(hillCategory, sortHeightMType, sortAlphabetType, sortLimit, maxHeight, minHeight)
+        }
         val list = requireContext().resources.getStringArray(R.array.sa_hillcategory)
         binding.spvHillcategory.adapter = ArrayAdapter(requireContext(), R.layout.item_spinner_simple, list)
         val sortList = requireContext().resources.getStringArray(R.array.sa_sorttype)
@@ -49,26 +60,37 @@ class MunroFilterFragment: Fragment() {
         binding.spvSortAlphabetic.adapter = ArrayAdapter(requireContext(), R.layout.item_spinner_simple, sortList)
         val sortMaxList = requireContext().resources.getStringArray(R.array.sa_maxsort)
         binding.spvFilterSortmax.adapter = ArrayAdapter(requireContext(), R.layout.item_spinner_simple, sortMaxList)
-    }
+        binding.tietFilterMaxheight.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-    fun closingFilterFragment(wasDoneClick: Boolean) {
-        if (wasDoneClick)  {
-            val hillCategory = binding.spvHillcategory.selectedItem.toString()
-            val sortHeightMType = binding.spvSortHeight.selectedItem.toString()
-            val sortAlphabetType = binding.spvSortAlphabetic.selectedItem.toString()
-            val sortLimit = binding.spvFilterSortmax.selectedItem.toString()
-            val maxHeight = DEFAULT_DOUBLE
-            val minHeight = DEFAULT_DOUBLE
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                binding.tietFilterMaxheight.error = null
+            }
 
-            viewModel.updateFilterModel(hillCategory, sortHeightMType, sortAlphabetType, sortLimit, maxHeight, minHeight)
+            override fun afterTextChanged(p0: Editable?) {}
+        })
+        binding.tietFilterMinheight.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-            findNavController().previousBackStackEntry?.savedStateHandle?.set(
-                KEY_UPDATE_MUNRO_FILTER, viewModel.filterModel.value?.convertToString())
-        }
-        findNavController().popBackStack()
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                binding.tietFilterMinheight.error = null
+            }
+
+            override fun afterTextChanged(p0: Editable?) {}
+        })
     }
 
     private fun initObservers() {
+        viewModel.filterChanged.observe(viewLifecycleOwner) { response ->
+            if (response) {
+                findNavController().previousBackStackEntry?.savedStateHandle?.set(
+                    KEY_UPDATE_MUNRO_FILTER, viewModel.obtainFilterModel()?.convertToString())
+                findNavController().popBackStack()
+            }
+        }
+        viewModel.filterErrorState.observe(viewLifecycleOwner) { response ->
+
+        }
         viewModel.filterModel.observe(viewLifecycleOwner) { response ->
 
             val list = requireContext().resources.getStringArray(R.array.sa_hillcategory)
