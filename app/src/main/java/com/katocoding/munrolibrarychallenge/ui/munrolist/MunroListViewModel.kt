@@ -25,18 +25,28 @@ class MunroListViewModel @Inject constructor(
 
     private var filterModel: FilterModel = FilterModel()
 
-    fun getMunroList() {
-        viewModelScope.launch {
-            when (val apiResponse = munroListRepository.getMunroRecords()) {
-                is ApiResponse.Success -> {
-                    apiResponse.data?.let { responseList ->
-                        filterMunroListData(responseList)
+    var isInitialLoad = true
+
+    fun getMunroList(loadStatus: MunroListLoadStatus) {
+        if (canLoadData(loadStatus)) {
+            _munroList.postValue(listOf(MunroListViewState(showLoading = true)))
+            viewModelScope.launch {
+                when (val apiResponse = munroListRepository.getMunroRecords()) {
+                    is ApiResponse.Success -> {
+                        apiResponse.data?.let { responseList ->
+                            filterMunroListData(responseList)
+                        }
                     }
+                    is ApiResponse.Error -> publishMunroListErrorViewState(apiResponse)
                 }
-                is ApiResponse.Error -> publishMunroListErrorViewState(apiResponse)
+                isInitialLoad = false
             }
         }
     }
+
+    fun canLoadData(
+        loadStatus: MunroListLoadStatus
+    ) = (loadStatus == MunroListLoadStatus.Reload) || (loadStatus == MunroListLoadStatus.Initial && isInitialLoad)
 
     fun filterMunroListData(recordList: List<MunroModel>) {
         when (val apiResponse = munroListFilter.checkFilterData(filterModel, recordList)) {
@@ -72,7 +82,7 @@ class MunroListViewModel @Inject constructor(
 
     fun updateFilterModel(updatedFilterModel: String) {
         filterModel = FilterModel(updatedFilterModel)
-        getMunroList()
+        getMunroList(MunroListLoadStatus.Reload)
     }
 
 }

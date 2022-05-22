@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -40,12 +41,15 @@ class MunroListFragment: Fragment() {
 
     fun initObservers() {
         viewModel.munroList.observe(viewLifecycleOwner) { responseList ->
-            when {
+            binding.clMunrofilterSpinnercontainer.isVisible = when {
+                responseList[0].showLoading -> true
                 responseList[0].showError -> {
 
+                    false
                 }
                 else -> {
                     (binding.rvMunrolist.adapter as MunroListAdapter).updateDataList(responseList)
+                    false
                 }
             }
         }
@@ -61,7 +65,7 @@ class MunroListFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getMunroList()
+        viewModel.getMunroList(MunroListLoadStatus.Initial)
     }
 
     override fun onDestroyView() {
