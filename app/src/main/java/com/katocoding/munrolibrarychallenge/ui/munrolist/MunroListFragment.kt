@@ -10,9 +10,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.katocoding.munrolibrarychallenge.KEY_UPDATE_MUNRO_FILTER
+import com.katocoding.munrolibrarychallenge.data.errors.DataErrorHandler
 import com.katocoding.munrolibrarychallenge.data.munrolist.filter.FilterModel
 import com.katocoding.munrolibrarychallenge.databinding.FragmentMunrolistBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MunroListFragment: Fragment() {
@@ -21,6 +23,9 @@ class MunroListFragment: Fragment() {
 
     private var _binding: FragmentMunrolistBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var dataErrorHandler: DataErrorHandler
 
     override fun onCreateView(
         inflater: LayoutInflater,

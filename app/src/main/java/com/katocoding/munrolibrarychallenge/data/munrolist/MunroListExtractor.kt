@@ -1,12 +1,12 @@
 package com.katocoding.munrolibrarychallenge.data.munrolist
 
+import com.katocoding.munrolibrarychallenge.DEFAULT_INTEGER
 import com.katocoding.munrolibrarychallenge.data.*
 import com.katocoding.munrolibrarychallenge.util.isInt
 import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
 
-@ActivityScoped
-class MunroListExtractor @Inject constructor(){
+class MunroListExtractor{
 
     fun extractMunroListData(records: MutableList<MutableList<String>>): List<MunroModel> = extractMunroLists(records[0], checkStreetMap(records))
 
@@ -14,12 +14,12 @@ class MunroListExtractor @Inject constructor(){
         headerList: MutableList<String>,
         records: MutableList<MutableList<String>>
     ): List<MunroModel>  {
-        val namePos = getHeaderListItem(headerList, MUNRODATA_NAME, 5)
-        val heightMPos = getHeaderListItem(headerList, MUNRODATA_HEIGHTM, 9)
-        val gridRefPos = getHeaderListItem(headerList, MUNRODATA_GRIDREF, 13)
-        val hillCategoryPos = getHeaderListItem(headerList, MUNRODATA_HILLCATEGORY, 27)
+        val namePos = getHeaderListItem(headerList, MUNRODATA_NAME)
+        val heightMPos = getHeaderListItem(headerList, MUNRODATA_HEIGHTM)
+        val gridRefPos = getHeaderListItem(headerList, MUNRODATA_GRIDREF)
+        val hillCategoryPos = getHeaderListItem(headerList, MUNRODATA_HILLCATEGORY)
         return records.mapNotNull {
-            if (it[hillCategoryPos].isNotBlank()) {
+            if (it.size > hillCategoryPos && it[hillCategoryPos].isNotBlank()) {
                 MunroModel(
                     name = it[namePos],
                     heightM = it[heightMPos].toDouble(),
@@ -32,10 +32,10 @@ class MunroListExtractor @Inject constructor(){
 
     fun checkStreetMap(records: MutableList<MutableList<String>>): MutableList<MutableList<String>> {
         val headerList = records[0]
-        val runningNoPosition = getHeaderListItem(headerList, MUNRODATA_RUNNINGNO, 0)
-        val streetMapPosition = getHeaderListItem(headerList, MUNRODATA_STREETMAP, 2)
-        val geographPosition = getHeaderListItem(headerList, MUNRODATA_GEOGRAPH, 3)
-        val hillBaggingPosition = getHeaderListItem(headerList, MUNRODATA_HILLBAGGING, 4)
+        val runningNoPosition = getHeaderListItem(headerList, MUNRODATA_RUNNINGNO)
+        val streetMapPosition = getHeaderListItem(headerList, MUNRODATA_STREETMAP)
+        val geographPosition = getHeaderListItem(headerList, MUNRODATA_GEOGRAPH)
+        val hillBaggingPosition = getHeaderListItem(headerList, MUNRODATA_HILLBAGGING)
         val newRecords = mutableListOf<MutableList<String>>()
         records.forEachIndexed { recordIndex, mutableList ->
             if (recordIndex > 0 && mutableList[runningNoPosition].isInt()) {
@@ -66,8 +66,7 @@ class MunroListExtractor @Inject constructor(){
 
     fun getHeaderListItem(
         headerList: MutableList<String>,
-        header: String,
-        defaultValue: Int
+        header: String
     ): Int {
         val position = headerList.indexOfFirst {
             (it == header)
@@ -75,7 +74,7 @@ class MunroListExtractor @Inject constructor(){
         return if (position != -1) {
             position
         } else {
-            defaultValue
+            DEFAULT_INTEGER
         }
     }
 
