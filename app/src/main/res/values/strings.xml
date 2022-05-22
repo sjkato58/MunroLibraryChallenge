@@ -26,9 +26,9 @@
     <string name="d_filter_sortmax">Maximum number of records:</string>
     <string name="d_hint_sortmax">Max records</string>
     <string name="d_filter_maxheight">Filter by Maximum Height in meters:</string>
-    <string name="d_hint_maxheight">Between </string>
+    <string name="d_hint_maxheight">Below 1344</string>
     <string name="d_filter_minheight">Filter by Minimum Height in meters:</string>
-    <string name="d_hint_minheight">Between </string>
+    <string name="d_hint_minheight">Above 915</string>
 
     <string name="d_demo_name">Ben Chonzie</string>
     <string name="d_demo_height">974</string>

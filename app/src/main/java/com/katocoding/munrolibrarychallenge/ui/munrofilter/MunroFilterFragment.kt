@@ -12,12 +12,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.katocoding.munrolibrarychallenge.DEFAULT_DOUBLE
 import com.katocoding.munrolibrarychallenge.KEY_UPDATE_MUNRO_FILTER
 import com.katocoding.munrolibrarychallenge.R
+import com.katocoding.munrolibrarychallenge.data.errors.DataErrorHandler
 import com.katocoding.munrolibrarychallenge.data.munrolist.filter.HillCategoryType
 import com.katocoding.munrolibrarychallenge.databinding.FragmentMunrofilterBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MunroFilterFragment: Fragment() {
@@ -25,6 +28,8 @@ class MunroFilterFragment: Fragment() {
     private val viewModel: MunroFilterViewModel by viewModels()
 
     private val args: MunroFilterFragmentArgs by navArgs()
+
+    @Inject lateinit var dataErrorHandler: DataErrorHandler
 
     private var _binding: FragmentMunrofilterBinding? = null
     private val binding get() = _binding!!
@@ -89,7 +94,13 @@ class MunroFilterFragment: Fragment() {
             }
         }
         viewModel.filterErrorState.observe(viewLifecycleOwner) { response ->
-
+            if (response.showError) {
+                Snackbar.make(
+                    binding.root,
+                    requireContext().resources.getString(dataErrorHandler.sortCSVError(response.maxError)),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         }
         viewModel.filterModel.observe(viewLifecycleOwner) { response ->
 
@@ -102,6 +113,13 @@ class MunroFilterFragment: Fragment() {
 
             val sortMaxList = requireContext().resources.getStringArray(R.array.sa_maxsort)
             binding.spvFilterSortmax.setSelection(sortMaxList.indexOf(response.sortLimit.toString()))
+
+            if (response.maxHeight != DEFAULT_DOUBLE) {
+                binding.tietFilterMaxheight.setText(response.maxHeight.toString())
+            }
+            if (response.minHeight != DEFAULT_DOUBLE) {
+                binding.tietFilterMinheight.setText(response.minHeight.toString())
+            }
         }
         viewModel.navigationEvent.observe(viewLifecycleOwner) {
             it(findNavController())

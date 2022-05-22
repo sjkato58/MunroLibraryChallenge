@@ -18,9 +18,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providesDataErrorHandler(
-        @ApplicationContext context: Context
-    ): DataErrorHandler = DataErrorHandler(context)
+    fun providesDataErrorHandler(): DataErrorHandler = DataErrorHandler()
 
     @Singleton
     @Provides

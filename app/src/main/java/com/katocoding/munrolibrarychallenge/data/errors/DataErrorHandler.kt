@@ -1,15 +1,13 @@
 package com.katocoding.munrolibrarychallenge.data.errors
 
-import android.content.Context
 import com.katocoding.munrolibrarychallenge.R
 
-class DataErrorHandler constructor(
-    private val context: Context
-) {
+class DataErrorHandler {
 
     fun sortCSVError(
         errorType: ErrorType
-    ): String = when (errorType) {
-        else -> context.resources.getString(R.string.err_csv_unknown)
+    ): Int = when (errorType) {
+        ErrorType.MaxSmallerThanMin -> R.string.err_max_smaller_min
+        else -> R.string.err_csv_unknown
     }
 }

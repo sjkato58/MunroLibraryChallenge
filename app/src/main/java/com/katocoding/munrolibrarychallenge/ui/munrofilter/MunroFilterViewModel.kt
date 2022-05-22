@@ -2,7 +2,9 @@ package com.katocoding.munrolibrarychallenge.ui.munrofilter
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.katocoding.munrolibrarychallenge.DEFAULT_DOUBLE
 import com.katocoding.munrolibrarychallenge.base.BaseViewModel
+import com.katocoding.munrolibrarychallenge.data.errors.ErrorType
 import com.katocoding.munrolibrarychallenge.data.munrolist.filter.FilterModel
 import com.katocoding.munrolibrarychallenge.data.munrolist.filter.HillCategoryType
 import com.katocoding.munrolibrarychallenge.data.munrolist.filter.SortType
@@ -45,11 +47,23 @@ class MunroFilterViewModel @Inject constructor(
             it.sortHeightMType = SortType.from(sortHeightMType)
             it.sortAlphabetType = SortType.from(sortAlphabetType)
             it.sortLimit = sortLimit.toInt()
-            it.maxHeight = maxHeight.toDouble()
-            it.minHeight = minHeight.toDouble()
+            val recordedMaxHeight = if (maxHeight.isBlank()) DEFAULT_DOUBLE else maxHeight.toDouble()
+            val recordedMinHeight = if (minHeight.isBlank()) DEFAULT_DOUBLE else minHeight.toDouble()
+            var errorType = if (recordedMaxHeight < recordedMinHeight) {
+                ErrorType.MaxSmallerThanMin
+            } else {
+                it.maxHeight = recordedMaxHeight
+                it.minHeight = recordedMinHeight
+                ErrorType.NONE
+            }
+
+            if (errorType == ErrorType.NONE) {
+                _filterModel.postValue(filterModel)
+                _filterChanged.postValue(true)
+            } else {
+                _filterErrorState.postValue(MunroFilterViewState(showError = true, maxError = errorType))
+            }
         }
-        _filterModel.postValue(filterModel)
-        _filterChanged.postValue(true)
     }
 
     fun obtainFilterModel() = _filterModel.value

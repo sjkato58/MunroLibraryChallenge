@@ -13,7 +13,7 @@
     <string-array name="sa_maxsort">
         <item>10</item>
         <item>20</item>
+        <item>30</item>
         <item>40</item>
-        <item>80</item>
     </string-array>
 </resources>

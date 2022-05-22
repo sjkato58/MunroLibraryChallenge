@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="err_csv_unknown">An unknown error has occurred, please try again later</string>
+    <string name="err_max_smaller_min">Your Maximum Height is greater than the Minimum Height.  Please adjust.</string>
 </resources>
