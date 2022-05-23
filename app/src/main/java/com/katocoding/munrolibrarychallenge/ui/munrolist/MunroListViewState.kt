@@ -11,6 +11,7 @@ data class MunroListViewState(
     val hillCategory: HillCategoryType = HillCategoryType.Munro,
     val gridReference: String = DEFAULT_STRING,
     val showLoading: Boolean = false,
+    val showEmpty: Boolean = false,
     val showError: Boolean = false,
     val errorType: ErrorType = ErrorType.NONE
 )

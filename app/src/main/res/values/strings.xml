@@ -6,6 +6,8 @@
     <string name="d_done">Done</string>
     <string name="d_save">Save</string>
 
+    <string name="d_list_empty">No Data available.\nPlease try refining your filter options.</string>
+
     <string name="t_filter_options">Filtering Options</string>
 
     <string name="d_munro">Munro</string>

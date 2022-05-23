@@ -60,13 +60,17 @@ class MunroListViewModel @Inject constructor(
     }
 
     fun publishMunroListViewState(recordList: List<MunroModel>) {
-        _munroList.value = recordList.map {
-            MunroListViewState(
-                name = it.name,
-                heightM = it.heightM,
-                hillCategory = it.hillCategory,
-                gridReference = it.gridReference
-            )
+        _munroList.value =  if (recordList.isEmpty()) {
+            listOf(MunroListViewState(showEmpty = true))
+        } else {
+            recordList.map {
+                MunroListViewState(
+                    name = it.name,
+                    heightM = it.heightM,
+                    hillCategory = it.hillCategory,
+                    gridReference = it.gridReference
+                )
+            }
         }
     }
 

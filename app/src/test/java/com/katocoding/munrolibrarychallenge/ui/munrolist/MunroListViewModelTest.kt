@@ -137,6 +137,45 @@ class MunroListViewModelTest {
     }
 
     @Test
+    fun `when getting an empty list then an empty result should be sent back`() {
+        val slot = slot<List<MunroListViewState>>()
+        val responsesList = mutableListOf<List<MunroListViewState>>()
+        val observer = mockk<Observer<List<MunroListViewState>>>()
+        coEvery {
+            munroListRepository.getMunroRecords()
+        } returns ApiResponse.Success(munroList)
+        coEvery {
+            munroListFilter.checkFilterData(filterModel, munroList)
+        } answers {
+            ApiResponse.Success(listOf())
+        }
+        coEvery {
+            observer.onChanged(capture(slot))
+        } answers {
+            responsesList.add(slot.captured)
+        }
+        viewModel.munroList.observeForever(observer)
+
+        runTest {
+            viewModel.getMunroList(MunroListLoadStatus.Initial)
+        }
+
+        print("This is the responsesList: $responsesList")
+
+        coVerify(exactly = VALUE_ONCE) {
+            munroListRepository.getMunroRecords()
+        }
+        coVerify(exactly = VALUE_ONCE) {
+            munroListFilter.checkFilterData(filterModel, munroList)
+        }
+        assertTrue(responsesList.size > 0)
+        assertTrue(responsesList[0][0].showLoading)
+        assertTrue(responsesList[1][0].showEmpty)
+
+        viewModel.munroList.removeObserver(observer)
+    }
+
+    @Test
     fun `when attempting to get list of munro records but an error occurs then the error should be sent back`() {
         val slot = slot<List<MunroListViewState>>()
         val responsesList = mutableListOf<List<MunroListViewState>>()

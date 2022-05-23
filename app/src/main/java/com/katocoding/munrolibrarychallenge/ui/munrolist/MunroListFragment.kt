@@ -49,6 +49,11 @@ class MunroListFragment: Fragment() {
         viewModel.munroList.observe(viewLifecycleOwner) { responseList ->
             binding.clMunrofilterSpinnercontainer.isVisible = when {
                 responseList[0].showLoading -> true
+                responseList[0].showEmpty -> {
+                    binding.rvMunrolist.isVisible = false
+                    binding.tvMunrolistEmpty.isVisible = true
+                    false
+                }
                 responseList[0].showError -> {
                     Snackbar.make(
                         binding.root,
@@ -58,6 +63,8 @@ class MunroListFragment: Fragment() {
                     false
                 }
                 else -> {
+                    binding.tvMunrolistEmpty.isVisible = false
+                    binding.rvMunrolist.isVisible = true
                     (binding.rvMunrolist.adapter as MunroListAdapter).updateDataList(responseList)
                     false
                 }
