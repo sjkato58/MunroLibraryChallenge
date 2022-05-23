@@ -9,7 +9,6 @@ import com.katocoding.munrolibrarychallenge.data.munrolist.MunroModel
 import com.katocoding.munrolibrarychallenge.data.munrolist.filter.FilterModel
 import com.katocoding.munrolibrarychallenge.data.munrolist.filter.HillCategoryType
 import com.katocoding.munrolibrarychallenge.data.munrolist.filter.MunroListFilter
-import com.katocoding.munrolibrarychallenge.data.munrolist.filter.SortType
 import io.mockk.*
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +30,6 @@ class MunroListViewModelTest {
     private val testCoroutineDispatcher = StandardTestDispatcher()
 
     private val munroListRepository = mockk<MunroListRepository>()
-    @RelaxedMockK
     private val munroListFilter = mockk<MunroListFilter>()
 
     lateinit var viewModel: MunroListViewModel

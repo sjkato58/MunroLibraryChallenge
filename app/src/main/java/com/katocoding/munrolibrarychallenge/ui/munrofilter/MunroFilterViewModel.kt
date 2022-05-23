@@ -41,28 +41,26 @@ class MunroFilterViewModel @Inject constructor(
         maxHeight: String,
         minHeight: String
     ) {
-        val filterModel = _filterModel.value
-        filterModel?.let {
-            it.hillCategory = HillCategoryType.from(hillCategoryType)
-            it.sortHeightMType = SortType.from(sortHeightMType)
-            it.sortAlphabetType = SortType.from(sortAlphabetType)
-            it.sortLimit = sortLimit.toInt()
-            val recordedMaxHeight = if (maxHeight.isBlank()) DEFAULT_DOUBLE else maxHeight.toDouble()
-            val recordedMinHeight = if (minHeight.isBlank()) DEFAULT_DOUBLE else minHeight.toDouble()
-            var errorType = if (recordedMaxHeight < recordedMinHeight) {
-                ErrorType.MaxSmallerThanMin
-            } else {
-                it.maxHeight = recordedMaxHeight
-                it.minHeight = recordedMinHeight
-                ErrorType.NONE
-            }
+        val filterModel = FilterModel()
+        filterModel.hillCategory = HillCategoryType.from(hillCategoryType)
+        filterModel.sortHeightMType = SortType.from(sortHeightMType)
+        filterModel.sortAlphabetType = SortType.from(sortAlphabetType)
+        filterModel.sortLimit = sortLimit.toInt()
+        val recordedMaxHeight = if (maxHeight.isBlank()) DEFAULT_DOUBLE else maxHeight.toDouble()
+        val recordedMinHeight = if (minHeight.isBlank()) DEFAULT_DOUBLE else minHeight.toDouble()
+        var errorType = if (recordedMaxHeight < recordedMinHeight) {
+            ErrorType.MaxSmallerThanMin
+        } else {
+            filterModel.maxHeight = recordedMaxHeight
+            filterModel.minHeight = recordedMinHeight
+            ErrorType.NONE
+        }
 
-            if (errorType == ErrorType.NONE) {
-                _filterModel.postValue(filterModel)
-                _filterChanged.postValue(true)
-            } else {
-                _filterErrorState.postValue(MunroFilterViewState(showError = true, maxError = errorType))
-            }
+        if (errorType == ErrorType.NONE) {
+            _filterModel.postValue(filterModel)
+            _filterChanged.postValue(true)
+        } else {
+            _filterErrorState.postValue(MunroFilterViewState(showError = true, maxError = errorType))
         }
     }
 
