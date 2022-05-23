@@ -1,5 +1,6 @@
 package com.katocoding.munrolibrarychallenge.ui.munrolist
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.katocoding.munrolibrarychallenge.KEY_UPDATE_MUNRO_FILTER
@@ -41,7 +43,13 @@ class MunroListFragment: Fragment() {
 
     fun initViews() {
         binding.tvToolbarFilter.setOnClickListener { viewModel.navigateToMunroFilter() }
-        binding.rvMunrolist.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.rvMunrolist.layoutManager = GridLayoutManager(
+            context,
+            when (resources.configuration.orientation) {
+                Configuration.ORIENTATION_LANDSCAPE -> 2
+                else -> 1
+            }
+        )
         binding.rvMunrolist.adapter = MunroListAdapter()
     }
 
