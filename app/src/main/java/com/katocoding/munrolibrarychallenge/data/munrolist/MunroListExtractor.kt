@@ -7,6 +7,7 @@ import com.katocoding.munrolibrarychallenge.util.isInt
 import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
 
+@ActivityScoped
 class MunroListExtractor{
 
     fun extractMunroListData(records: MutableList<MutableList<String>>): ApiResponse<List<MunroModel>> {
